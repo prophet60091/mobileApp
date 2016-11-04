@@ -7,7 +7,7 @@ angular.module('app.routes', ['restangular'])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
 
-  RestangularProvider.setBaseUrl('http://54.218.249.67');
+  RestangularProvider.setBaseUrl('http://54.201.28.243');
 
   $stateProvider
 
