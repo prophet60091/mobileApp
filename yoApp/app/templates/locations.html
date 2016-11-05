@@ -3,18 +3,29 @@
     <form id="locations-form3" class="list">
       <label class="item item-input">
         <i class="icon ion-search placeholder-icon"></i>
-        <input type="search" placeholder="search this list">
+        <input type="search" placeholder="type a location -" ng-model="gPlaces">
       </label>
     </form>
+    <div id="locations-button-bar2" class="button-bar">
+      <button id="locations-button6" class="button button-positive  button-block" ng-click="getCurLocation()">Get Current Location</button>
+    </div>
+    <div id="currentLocation-display" ng-bind="address">
+    </div>
     <div id="locations-button-bar1" class="button-bar">
       <button id="locations-button4" class="button button-positive  button-block">Add</button>
-      <button id="locations-button5" class="button button-positive  button-block">View All</button>
+      <button id="locations-button5" class="button button-positive  button-block" ng-click="getLocations()" >View All</button>
     </div>
-    <div class="item item-body" id="locations-list-item-container1">
-      <div id="locations-markdown2">
-        <p style="margin-top:0px;color:#000000;font-size:9px;">Some friendly
-          <strong>markdown</strong>
-        </p>
+    <div class="item item-body" id="locations-list-item-container1" >
+      <div id="locations-markdown2" ng-repeat="loca in locations">
+        <div class="block">
+          <span>Name: {{loca.name}}</span>
+          <span>Name: {{loca.type}}</span>
+          <span>Number: {{loca.address[0].number}}</span>
+          <span>Street: {{loca.address[0].street}}</span>
+          <span>City: {{loca.address[0].city}}</span>
+          <span>State: {{loca.address[0].state}}</span>
+          <span>zip: {{loca.address[0].zip}}</span>
+        </div>
       </div>
     </div>
   </ion-content>

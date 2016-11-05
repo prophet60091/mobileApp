@@ -12,7 +12,6 @@ angular.module('app.routes', ['restangular'])
   $stateProvider
 
 
-
   .state('tabsController.locations', {
     url: '/location',
     views: {
