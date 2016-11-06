@@ -23,7 +23,7 @@ angular.module('app.routes', ['restangular'])
   })
 
   .state('addLocation', {
-    url: '/create/location/:test/{noClue}',
+    url: '/create/location/{address}',
     templateUrl: 'templates/addLocation.html',
     controller: 'addLocationCtrl'
   })

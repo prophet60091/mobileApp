@@ -46,7 +46,8 @@ function ($scope, $state,  $stateParams, $cordovaGeolocation, $ionicLoading, $io
             //console.log('sok', address);
             $scope.clocFormattedAddress = results[0].formatted_address;
             $scope.$apply();
-            address= results[0];
+            address = results[0];
+            console.log("resulting address", address);
           }
           $ionicLoading.hide();
         });
@@ -70,13 +71,13 @@ function ($scope, $state,  $stateParams, $cordovaGeolocation, $ionicLoading, $io
 
   $scope.addLocation = function(){
       showLocation = false;
+    console.log("address to be saved", address);
+
       $state.go('addLocation', {address: address, noClue:{number:address[0],street:address[1]}});
   };
   // $scope.getLoca = getLocations(Location);
 
   //Add Current location, or searched location to the list.
-
-
 
 }])
 
@@ -84,13 +85,19 @@ function ($scope, $state,  $stateParams, $cordovaGeolocation, $ionicLoading, $io
 
 function ($scope, $stateParams, Location) {
 
+  var addy = $stateParams.address; // just to shorten it up
+  console.log("addy",addy);
   //populate the form
-  if($stateParams.address != ''){
+  if(addy != '' && addy != undefined){
     console.log("you got it!");
-    console.log($stateParams.address);
-    //console.log($stateParams.noClue);
+    var num = addy.address_components[0].long_name;
+    var street = addy.address_components[1].long_name;
+    var unit = addy.address_components[2].long_name;
+    var city = addy.address_components[3].long_name;
+    var state = addy.address_components[5].long_name;
+    var zip = addy.address_components[7].long_name + '-' + addy.address_components[8].long_name;
+    clocFormattedAddress = addy.formatted_address;
   }
-
 
   /**
    * Save the location
