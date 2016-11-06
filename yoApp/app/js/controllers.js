@@ -80,7 +80,7 @@ function ($scope, $state,  $stateParams, $cordovaGeolocation, $ionicLoading, $io
 
 }])
 
-.controller('addLocationCtrl', ['$scope', '$stateParams', 'Location', 'GoogleAddress', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('addLocationCtrl', ['$scope', '$stateParams', 'Location', 'GoogleAddress', '$location', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 
 function ($scope, $stateParams, Location, GoogleAddress, $location) {
 
@@ -102,7 +102,7 @@ function ($scope, $stateParams, Location, GoogleAddress, $location) {
    * Save the location
    */
   $scope.saveLocation= function() {
-    Location.post($scope.loca).then(function(response) {
+    Location.post($scope.location).then(function(response) {
       $location.path('/location');
     },function(response){
       console.log( response);
@@ -111,6 +111,7 @@ function ($scope, $stateParams, Location, GoogleAddress, $location) {
         //do some stuff with it
         $scope.failed = true;
         $scope.failMessage = response.data.errors.name.path + " is required";
+        console.log("fail");
       }
     });
   };

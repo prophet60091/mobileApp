@@ -12,7 +12,7 @@
         <form id="addLocation-form9" class="list">
           <label class="item item-input" id="addLocation-input3">
             <span class="input-label">name</span>
-            <input type="text" placeholder="The name of the location">
+            <input type="text" placeholder="The name of the location" ng-value="name">
           </label>
         </form>
       </form>
@@ -21,10 +21,12 @@
     <form id="addLocation-form10" class="list">
       <label class="item item-select" id="addLocation-select1">
         <span class="input-label">What kind of place is it?</span>
-        <select>Brewery</select>
-        <select>Restaurant</select>
-        <select>Liquor Store</select>
-        <select>Friend's basement...</select>
+        <select >
+          <option ng-value="type" selected>Brewery</option>
+          <option ng-value="type">Restaurant</option>
+          <option ng-value="type" >Liquor Store</option>
+          <option ng-value="type">Friend's basement...</option>
+        </select>
       </label>
       <label class="item item-input" id="addLocation-input6">
         <span class="input-label">Number</span>
