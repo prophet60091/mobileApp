@@ -58,15 +58,14 @@ function ($scope, $stateParams, $cordovaGeolocation, $ionicLoading, $ionicPlatfo
             //console.log('sok', address);
             $scope.clocFormattedAddress = results[1].formatted_address;
             $scope.$apply();
-          } });
+          }
+          $ionicLoading.hide();
+        });
 
-        // $ionicLoading.hide();
 
       }, function(err) {
         $ionicLoading.hide();
         console.log(err);
-      }).finally(function($ionicLoading){
-          $ionicLoading.hide();
       })
     };
 
@@ -82,8 +81,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $ionicLoading, $ionicPlatfo
 
   $scope.addLocation = function(){
       showLocation = false;
-      this.getLocations();
-      $scope.$apply();
+      //$location.path=("#/page1/addLocation");
   };
   // $scope.getLoca = getLocations(Location);
 

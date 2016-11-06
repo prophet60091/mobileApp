@@ -10,12 +10,11 @@
       <button id="locations-button6" class="button button-positive  button-block" ng-click="getCurLocation()">Get Current Location</button>
     </div>
     <div class="list card" id="locations-card21" ng-show="showLocation">
-      <ion-item class="item-avatar" id="locations-list-item13">
-        <h2>You are Here:</h2>
-      </ion-item>
       <div class="item item-body" id="locations-list-item-container4">
         <div id="locations-markdown6" class="show-list-numbers-and-dots">
-          <p style="margin-top:0px;color:#000000;">{{clocFormattedAddress}}
+          <h2>You are Here:</h2>
+          <p style="margin-top:0px;color:#000000;">
+            {{clocFormattedAddress}}
           </p>
         </div>
       </div>
