@@ -23,9 +23,11 @@ angular.module('app.routes', ['restangular'])
   })
 
   .state('addLocation', {
-    url: '/create/location/{address}',
+    url: '/create/location/:address/{noClue}',
     templateUrl: 'templates/addLocation.html',
-    controller: 'addLocationCtrl'
+    controller: 'addLocationCtrl',
+    address:null,
+    noClue: null
   })
 
   .state('tabsController.beers', {

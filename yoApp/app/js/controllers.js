@@ -6,7 +6,8 @@ angular.module('app.controllers', ['restangular', 'ngCordova',])
   '$ionicLoading',
   '$ionicPlatform',
   'Location',
-function ($scope, $state,  $stateParams, $cordovaGeolocation, $ionicLoading, $ionicPlatform, Location) {
+  'GoogleAddress',
+function ($scope, $state,  $stateParams, $cordovaGeolocation, $ionicLoading, $ionicPlatform, Location, GoogleAddress) {
     var showLocation = false;
     var address = {};
     /**
@@ -46,8 +47,9 @@ function ($scope, $state,  $stateParams, $cordovaGeolocation, $ionicLoading, $io
             //console.log('sok', address);
             $scope.clocFormattedAddress = results[0].formatted_address;
             $scope.$apply();
-            address = results[0];
-            console.log("resulting address", address);
+            GoogleAddress.address = results[0].address_components;
+            GoogleAddress.clocFormattedAddress = results[0].formatted_address;
+            //console.log("resulting address", address);
           }
           $ionicLoading.hide();
         });
@@ -69,34 +71,31 @@ function ($scope, $state,  $stateParams, $cordovaGeolocation, $ionicLoading, $io
     });
   };
 
+  //Add Current location, or searched location to the list.
   $scope.addLocation = function(){
       showLocation = false;
-    console.log("address to be saved", address);
-
-      $state.go('addLocation', {address: address, noClue:{number:address[0],street:address[1]}});
+      //console.log("address to be saved", address);
+      $state.go('addLocation', {});
   };
-  // $scope.getLoca = getLocations(Location);
-
-  //Add Current location, or searched location to the list.
 
 }])
 
-.controller('addLocationCtrl', ['$scope', '$stateParams', 'Location', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('addLocationCtrl', ['$scope', '$stateParams', 'Location', 'GoogleAddress', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 
-function ($scope, $stateParams, Location) {
+function ($scope, $stateParams, Location, GoogleAddress, $location) {
 
-  var addy = $stateParams.address; // just to shorten it up
-  console.log("addy",addy);
+  var addy = GoogleAddress.address; // just to shorten it up
+
   //populate the form
   if(addy != '' && addy != undefined){
     console.log("you got it!");
-    var num = addy.address_components[0].long_name;
-    var street = addy.address_components[1].long_name;
-    var unit = addy.address_components[2].long_name;
-    var city = addy.address_components[3].long_name;
-    var state = addy.address_components[5].long_name;
-    var zip = addy.address_components[7].long_name + '-' + addy.address_components[8].long_name;
-    clocFormattedAddress = addy.formatted_address;
+    $scope.num = addy[0].long_name;
+    $scope.street = addy[1].long_name;
+    $scope.unit = addy[2].long_name;
+    $scope.city = addy[3].long_name;
+    $scope.state = addy[5].long_name;
+    $scope.zip = addy[7].long_name + '-' + addy[8].long_name;
+    $scope.clocFormattedAddress = addy.formatted_address;
   }
 
   /**
