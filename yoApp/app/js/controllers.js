@@ -6,13 +6,25 @@ angular.module('app.controllers', ['restangular', 'ngCordova',])
   '$ionicLoading',
   '$ionicPlatform',
   'Location',
-// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $cordovaGeolocation, $ionicLoading, $ionicPlatform, Location) {
-    showLocation = false;
+    var showLocation = false;
+    /**
+    *
+    */
+    $scope.show = function(){
+      $ionicLoading.show({
+       template: '<ion-spinner icon="bubbles"></ion-spinner><br/>Acquiring location!'
+      });
+    };
+    $scope.hide = function(){
+      $ionicLoading.hide();
+    };
 
-    //Attempt to get the users Current location
+
+    /**
+    * Get the location of the User
+    *  Adapted from http://www.gajotres.net/using-cordova-geoloacation-api-with-google-maps-in-ionic-framework/
+    */
     $scope.getCurLocation = function(){
 
       //show the location
@@ -23,10 +35,6 @@ function ($scope, $stateParams, $cordovaGeolocation, $ionicLoading, $ionicPlatfo
         timeout: 20000,
         maximumAge: 0
       };
-
-       // $ionicLoading.show({
-       //  template: '<ion-spinner icon="bubbles"></ion-spinner><br/>Acquiring location!'
-       // });
 
       $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
         var lat  = position.coords.latitude;
@@ -41,7 +49,10 @@ function ($scope, $stateParams, $cordovaGeolocation, $ionicLoading, $ionicPlatfo
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
-        //var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        $ionicLoading.show({
+          template: '<ion-spinner icon="bubbles"></ion-spinner><br/>Acquiring location!'
+        });
+
         geocoder.geocode({'location': myLatlng}, function(results, status) {
           if (status === 'OK') {
             //console.log('sok', address);
@@ -54,33 +65,12 @@ function ($scope, $stateParams, $cordovaGeolocation, $ionicLoading, $ionicPlatfo
       }, function(err) {
         $ionicLoading.hide();
         console.log(err);
+      }).finally(function($ionicLoading){
+          $ionicLoading.hide();
       })
     };
 
-  var options = {timeout: 10000, enableHighAccuracy: true};
-
-  /*$cordovaGeolocation.getCurrentPosition(options).then(function(position){
-
-    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
-    var mapOptions = {
-      center: latLng,
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-
-    //$scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
-    $scope.address = new google.maps.GeocodeRequest({'location': latLng}, function(results, status) {
-      if (status === 'OK') {
-        console.log('sok', address);
-      } });
-
-  }, function(error){
-    console.log("Could not get location");
-  });*/
-
   //locations available from the API
-
   $scope.getLocations = function() {
     Location.getList().then(function (data) {
       $scope.locations = data;
