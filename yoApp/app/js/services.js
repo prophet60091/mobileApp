@@ -20,6 +20,7 @@ angular.module('app.services', ['restangular'])
   return BeerRestangular.service('location'); // The actual api resource from whence it pulls
 })
 
-.service('BlankService', [function(){
-
+.service('currentLocation', [function(){
+  this.clocFormattedAddress  = "orly";
+  this.test= false;
 }]);

@@ -1,26 +1,14 @@
 angular.module('app.controllers', ['restangular', 'ngCordova',])
 
-.controller('locationsCtrl', ['$scope',
+.controller('locationsCtrl', ['$scope', '$state',
   '$stateParams',
   '$cordovaGeolocation',
   '$ionicLoading',
   '$ionicPlatform',
   'Location',
-function ($scope, $stateParams, $cordovaGeolocation, $ionicLoading, $ionicPlatform, Location) {
+function ($scope, $state,  $stateParams, $cordovaGeolocation, $ionicLoading, $ionicPlatform, Location) {
     var showLocation = false;
-    /**
-    *
-    */
-    $scope.show = function(){
-      $ionicLoading.show({
-       template: '<ion-spinner icon="bubbles"></ion-spinner><br/>Acquiring location!'
-      });
-    };
-    $scope.hide = function(){
-      $ionicLoading.hide();
-    };
-
-
+    var address = {};
     /**
     * Get the location of the User
     *  Adapted from http://www.gajotres.net/using-cordova-geoloacation-api-with-google-maps-in-ionic-framework/
@@ -56,8 +44,9 @@ function ($scope, $stateParams, $cordovaGeolocation, $ionicLoading, $ionicPlatfo
         geocoder.geocode({'location': myLatlng}, function(results, status) {
           if (status === 'OK') {
             //console.log('sok', address);
-            $scope.clocFormattedAddress = results[1].formatted_address;
+            $scope.clocFormattedAddress = results[0].formatted_address;
             $scope.$apply();
+            address= results[0];
           }
           $ionicLoading.hide();
         });
@@ -81,7 +70,7 @@ function ($scope, $stateParams, $cordovaGeolocation, $ionicLoading, $ionicPlatfo
 
   $scope.addLocation = function(){
       showLocation = false;
-      //$location.path=("#/page1/addLocation");
+      $state.go('addLocation', {address: address, noClue:{number:address[0],street:address[1]}});
   };
   // $scope.getLoca = getLocations(Location);
 
@@ -91,11 +80,34 @@ function ($scope, $stateParams, $cordovaGeolocation, $ionicLoading, $ionicPlatfo
 
 }])
 
-.controller('addLocationCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams ) {
+.controller('addLocationCtrl', ['$scope', '$stateParams', 'Location', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 
+function ($scope, $stateParams, Location) {
+
+  //populate the form
+  if($stateParams.address != ''){
+    console.log("you got it!");
+    console.log($stateParams.address);
+    //console.log($stateParams.noClue);
+  }
+
+
+  /**
+   * Save the location
+   */
+  $scope.saveLocation= function() {
+    Location.post($scope.loca).then(function(response) {
+      $location.path('/location');
+    },function(response){
+      console.log( response);
+      //we got a bad response - i.e. something what not filled out
+      if(response.status == 400){
+        //do some stuff with it
+        $scope.failed = true;
+        $scope.failMessage = response.data.errors.name.path + " is required";
+      }
+    });
+  };
 
 }])
 

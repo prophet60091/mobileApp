@@ -4,15 +4,54 @@
   </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
     <div id="addLocation-container1">
-      <button id="addLocation-button9" class="button button-calm  button-block button-outline icon ion-android-locate"> Use current location</button>
+      <button id="addLocation-button9" class="button button-calm  button-block button-outline icon ion-android-locate"> Update Form to current location</button>
       <form id="addLocation-form7" class="list">
         <label class="item item-input" id="addLocation-textarea1" name="loca">
-          <span class="input-label">loca</span><textarea placeholder="Type your location">locate</textarea></label>
+          <span class="input-label">loca</span><textarea placeholder="">{{clocFormattedAddress}}</textarea></label>
         <div class="spacer" style="width: 300px; height: 47px;"></div>
+        <form id="addLocation-form9" class="list">
+          <label class="item item-input" id="addLocation-input3">
+            <span class="input-label">name</span>
+            <input type="text" placeholder="">
+          </label>
+        </form>
       </form>
     </div>
     <div id="addLocation-button-bar2" class="button-bar"></div>
-    <div id="addLocation-container3" class="results creator-container"></div>
+    <form id="addLocation-form10" class="list">
+      <label class="item item-select" id="addLocation-select1">
+        <span class="input-label">type</span>
+        <select></select>
+      </label>
+    </form>
+    <form id="addLocation-form12" class="list">
+      <label class="item item-input" id="addLocation-input6">
+        <span class="input-label">Number</span>
+        <input type="text" placeholder="">
+      </label>
+      <label class="item item-input" id="addLocation-input5">
+        <span class="input-label">Street</span>
+        <input type="text" placeholder="">
+      </label>
+      <label class="item item-input" id="addLocation-input9">
+        <span class="input-label">Unit</span>
+        <input type="text" placeholder="">
+      </label>
+      <label class="item item-input" id="addLocation-input10">
+        <span class="input-label">city</span>
+        <input type="text" placeholder="">
+      </label>
+    </form>
+    <form id="addLocation-form15" class="list">
+      <label class="item item-input" id="addLocation-input12">
+        <span class="input-label">state</span>
+        <input type="text" placeholder="">
+      </label>
+      <label class="item item-input" id="addLocation-input11">
+        <span class="input-label">zip</span>
+        <input type="text" placeholder="">
+      </label>
+    </form>
     <div id="addLocation-button-bar3" class="button-bar">
       <button id="addLocation-button13" class="button button-balanced  button-block">Add </button>
       <button id="addLocation-button15" class="button button-dark  button-block">Reset</button>
