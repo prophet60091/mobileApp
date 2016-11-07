@@ -9,7 +9,7 @@
 
     <form id="addLocation-form7" class="list">
 
-      <label class="item item-input" id="addLocation-textarea1" name="loca">
+      <label class="item item-input" id="addLocation-textarea1">
         <span class="input-label">Location to be added</span><textarea placeholder="">{{clocFormattedAddress}}</textarea></label>
       <div class="spacer" style="width: 300px; height: 47px;"></div>
 
@@ -17,9 +17,6 @@
         <span class="input-label">name</span>
         <input type="text" placeholder="The name of the location" ng-model="location.name">
       </label>
-
-    <div id="addLocation-button-bar2" class="button-bar"></div>
-    <form id="addLocation-form10" class="list">
       <label class="item item-select" id="addLocation-select1">
         <span class="input-label">What kind of place is it?</span>
         <select ng-model="location.type">
@@ -31,27 +28,27 @@
       </label>
       <label class="item item-input" id="addLocation-input6">
         <span class="input-label">Number</span>
-        <input type="text" placeholder="Enter the address number" ng-model="location.num">
+        <input type="text" placeholder="Enter the address number" ng-model="location.address.number">
       </label>
       <label class="item item-input" id="addLocation-input5">
         <span class="input-label">Street</span>
-        <input type="text" placeholder="Enter the street name" ng-value="location.street" ng-model="location.street">
+        <input type="text" placeholder="Enter the street name" ng-model="location.address.street">
       </label>
       <label class="item item-input" id="addLocation-input9">
         <span class="input-label">Unit</span>
-        <input type="text" placeholder="Enter the Apartment, Suite, etc" ng-model="location.unit">
+        <input type="text" placeholder="Enter the Apartment, Suite, etc" ng-model="location.address.unit">
       </label>
       <label class="item item-input" id="addLocation-input10">
         <span class="input-label">city</span>
-        <input type="text" placeholder="Enter the City"  ng-model="location.city">
+        <input type="text" placeholder="Enter the City"  ng-model="location.address.city">
       </label>
       <label class="item item-input" id="addLocation-input12">
         <span class="input-label">state</span>
-        <input type="text" placeholder="Enter the State" ng-model="location.state">
+        <input type="text" placeholder="Enter the State" ng-model="location.address.state">
       </label>
       <label class="item item-input" id="addLocation-input11">
         <span class="input-label">zip</span>
-        <input type="text" placeholder="Enter the Zip Code" ng-model="location.zip">
+        <input type="text" placeholder="Enter the Zip Code" ng-model="location.address.zip">
       </label>
     </form>
     <div id="addLocation-button-bar3" class="button-bar">

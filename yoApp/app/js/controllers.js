@@ -85,18 +85,21 @@ function ($scope, $stateParams, Location, GoogleAddress, $location) {
 
   var addy = GoogleAddress.address; // just to shorten it up
   var location = {};
+  var address = {};
   //populate the form
   if(addy != '' && addy != undefined){
     console.log("you got it!");
     location.name = '';
     location.type = '';
-    location.num = addy[0].long_name;
-    location.street = addy[1].long_name;
-    location.unit = addy[2].long_name;
-    location.city = addy[3].long_name;
-    location.state = addy[5].long_name;
-    location.zip = addy[7].long_name + '-' + addy[8].long_name;
+
+    address.number = addy[0].long_name;
+    address.street = addy[1].long_name;
+    address.unit = addy[2].long_name;
+    address.city = addy[3].long_name;
+    address.state = addy[5].long_name;
+    address.zip = addy[7].long_name + '-' + addy[8].long_name;
     $scope.clocFormattedAddress = GoogleAddress.clocFormattedAddress;
+    location.address = address;
     $scope.location = location;
   }
 
@@ -107,9 +110,8 @@ function ($scope, $stateParams, Location, GoogleAddress, $location) {
     Location.post($scope.location).then(function(response) {
       $location.path('/locations');
       console.log($location);
-
     },function(response){
-      console.log( response);
+
       //we got a bad response - i.e. something what not filled out
       if(response.status == 400){
         //do some stuff with it
