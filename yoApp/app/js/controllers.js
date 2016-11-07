@@ -110,10 +110,10 @@ function ($scope, $stateParams, Location, GoogleAddress, $location, $ionicPopup)
    * adapted from  https://ionicframework.com/docs/api/service/$ionicPopup/
    */
   // An alert dialog
-  $scope.showAlert = function($msg) {
+  $scope.showAlert = function() {
     var alertPopup = $ionicPopup.alert({
       title: 'Bad input!',
-      template: msg + 'or is too long'
+      template: 'bad bad bad'
     });
 
     alertPopup.then(function(res) {
@@ -135,7 +135,7 @@ function ($scope, $stateParams, Location, GoogleAddress, $location, $ionicPopup)
         $scope.failed = true;
         $scope.failMessage = response.data.errors.name.path + " is required";
         // angular.element('#form-'+ response.data.errors.name.path).addClass("missing");
-        showAlert($scope.failMessage);
+        //showAlert(response.data.errors.name.path + " is required");
       }
     });
   };

@@ -4,49 +4,48 @@
   </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
     <div ng-if="failed" class="alert" >Bad Information! {{failMessage}} or is too long</div>
-
-    <form id="addLocation-form7" class="list">
-
+    <form id="addLocation-form7" class="list" name="myform">
       <label class="item item-input" id="addLocation-textarea1">
-        <span class="input-label">Location to be added</span><textarea placeholder="">{{clocFormattedAddress}}</textarea></label>
+        <span class="input-label"><strong>Location to be added</strong>{{clocFormattedAddress}}</span></label>
       <div class="spacer" style="width: 300px; height: 47px;"></div>
 
-      <label class="item item-input" id="form-name" >
+      <label class="item item-input" id="form-name" for="name">
         <span class="input-label">name</span>
-        <input type="text" placeholder="The name of the location" ng-model="location.name" required>
+        <input type="text" placeholder="The name of the location" id="name" ng-model="location.name" ng-required="string" ng-minlength="3" ng-maxlength="60" required>
       </label>
-      <label class="item item-select" id="form-type">
+      <p ng-show="myform.name.$invalid && !myForm.name.$pristine">* Name is required and must be more than 3 letters</p>
+      <label class="item item-select" id="form-type" for="type">
         <span class="input-label">What kind of place is it?</span>
-        <select ng-model="location.type" required>
+        <select ng-model="location.type" id="type" required>
           <option  selected>Brewery</option>
           <option >Restaurant</option>
           <option  >Liquor Store</option>
           <option >Friend's basement...</option>
         </select>
       </label>
-      <label class="item item-input" id="form-number">
+      <label class="item item-input" id="form-number" for="number">
         <span class="input-label">Number</span>
-        <input type="text" placeholder="Enter the address number" ng-model="location.address.number">
+        <input type="text" placeholder="Enter the address number" id="number" ng-model="location.address.number">
       </label>
-      <label class="item item-input" id="form-street">
+      <label class="item item-input" id="form-street" for="street">
         <span class="input-label">Street</span>
-        <input type="text" placeholder="Enter the street name" ng-model="location.address.street">
+        <input type="text" placeholder="Enter the street name" id="street" ng-model="location.address.street">
       </label>
-      <label class="item item-input" id="addLocation-input9">
+      <label class="item item-input" id="form-unit" for="unit">
         <span class="input-label">Unit</span>
-        <input type="text" placeholder="Enter the Apartment, Suite, etc" ng-model="location.address.unit">
+        <input type="text" placeholder="Enter the Apartment, Suite, etc" id="unit" ng-model="location.address.unit">
       </label>
-      <label class="item item-input" id="form-city">
+      <label class="item item-input" id="form-city" for="city">
         <span class="input-label">city</span>
-        <input type="text" placeholder="Enter the City"  ng-model="location.address.city">
+        <input type="text" placeholder="Enter the City" id="city" ng-model="location.address.city">
       </label>
-      <label class="item item-input" id="form-state">
+      <label class="item item-input" id="form-state" for="state">
         <span class="input-label">state</span>
-        <input type="text" placeholder="Enter the State" ng-model="location.address.state">
+        <input type="text" placeholder="Enter the State" id="state" ng-model="location.address.state">
       </label>
-      <label class="item item-input" id="form-zip">
+      <label class="item item-input" id="form-zip" for="zip">
         <span class="input-label">zip</span>
-        <input type="text" placeholder="Enter the Zip Code" ng-model="location.address.zip">
+        <input type="text" placeholder="Enter the Zip Code" id="zip" ng-model="location.address.zip">
       </label>
     </form>
     <div id="addLocation-button-bar3" class="button-bar">
