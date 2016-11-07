@@ -81,17 +81,18 @@ function ($scope, $state,  $stateParams, $cordovaGeolocation, $ionicLoading, $io
 
 .controller('addLocationCtrl', ['$scope', '$stateParams', 'Location', 'GoogleAddress', '$location', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 
-function ($scope, $stateParams, Location, GoogleAddress, $location) {
+function ($scope, $stateParams, Location, GoogleAddress, $location, $ionicPopup) {
 
+  $scope.failed = false;
   var addy = GoogleAddress.address; // just to shorten it up
   var location = {};
   var address = {};
+
   //populate the form
   if(addy != '' && addy != undefined){
     console.log("you got it!");
     location.name = '';
     location.type = '';
-
     address.number = addy[0].long_name;
     address.street = addy[1].long_name;
     address.unit = addy[2].long_name;
@@ -103,6 +104,22 @@ function ($scope, $stateParams, Location, GoogleAddress, $location) {
     $scope.location = location;
   }
 
+  /**
+   * Alert Popup
+   * @param $msg The message received from the api
+   * adapted from  https://ionicframework.com/docs/api/service/$ionicPopup/
+   */
+  // An alert dialog
+  $scope.showAlert = function($msg) {
+    var alertPopup = $ionicPopup.alert({
+      title: 'Bad input!',
+      template: msg + 'or is too long'
+    });
+
+    alertPopup.then(function(res) {
+      console.log('fail');
+    });
+  };
   /**
    * Save the location
    */
@@ -117,7 +134,8 @@ function ($scope, $stateParams, Location, GoogleAddress, $location) {
         //do some stuff with it
         $scope.failed = true;
         $scope.failMessage = response.data.errors.name.path + " is required";
-        console.log("fail");
+        // angular.element('#form-'+ response.data.errors.name.path).addClass("missing");
+        showAlert($scope.failMessage);
       }
     });
   };
