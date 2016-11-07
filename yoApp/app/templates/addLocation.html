@@ -3,17 +3,15 @@
     <button class="button icon ion-android-arrow-back"> back</button>
   </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
-    <div ng-if="failed" class="alert" >Bad Information! {{failMessage}} or is too long</div>
     <form id="addLocation-form7" class="list" name="myform">
       <label class="item item-input" id="addLocation-textarea1">
         <span class="input-label"><strong>Location to be added</strong>{{clocFormattedAddress}}</span></label>
       <div class="spacer" style="width: 300px; height: 47px;"></div>
-
       <label class="item item-input" id="form-name" for="name">
         <span class="input-label">name</span>
-        <input type="text" placeholder="The name of the location" id="name" ng-model="location.name" ng-required="string" ng-minlength="3" ng-maxlength="60" required>
+        <input type="text" placeholder="The name of the location" id="name" ng-model="location.name" required>
       </label>
-      <p ng-show="myform.name.$invalid && !myForm.name.$pristine">* Name is required and must be more than 3 letters</p>
+      <div ng-if="failed" class="alert" >Bad Information! {{failMessage}} or is too long</div>
       <label class="item item-select" id="form-type" for="type">
         <span class="input-label">What kind of place is it?</span>
         <select ng-model="location.type" id="type" required>
