@@ -5,56 +5,57 @@
   <ion-content padding="true" class="has-header">
     <div id="addLocation-container1">
       <button id="addLocation-button9" class="button button-calm  button-block button-outline icon ion-android-locate"> Update Form to current location</button>
-      <form id="addLocation-form7" class="list">
-        <label class="item item-input" id="addLocation-textarea1" name="loca">
-          <span class="input-label">Location to be added</span><textarea placeholder="">{{clocFormattedAddress}}</textarea></label>
-        <div class="spacer" style="width: 300px; height: 47px;"></div>
-        <form id="addLocation-form9" class="list">
-          <label class="item item-input" id="addLocation-input3">
-            <span class="input-label">name</span>
-            <input type="text" placeholder="The name of the location" ng-value="name">
-          </label>
-        </form>
-      </form>
     </div>
+
+    <form id="addLocation-form7" class="list">
+
+      <label class="item item-input" id="addLocation-textarea1" name="loca">
+        <span class="input-label">Location to be added</span><textarea placeholder="">{{clocFormattedAddress}}</textarea></label>
+      <div class="spacer" style="width: 300px; height: 47px;"></div>
+
+      <label class="item item-input" id="addLocation-input3">
+        <span class="input-label">name</span>
+        <input type="text" placeholder="The name of the location" ng-model="location.name">
+      </label>
+
     <div id="addLocation-button-bar2" class="button-bar"></div>
     <form id="addLocation-form10" class="list">
       <label class="item item-select" id="addLocation-select1">
         <span class="input-label">What kind of place is it?</span>
-        <select >
-          <option ng-value="type" selected>Brewery</option>
-          <option ng-value="type">Restaurant</option>
-          <option ng-value="type" >Liquor Store</option>
-          <option ng-value="type">Friend's basement...</option>
+        <select ng-model="location.type">
+          <option  selected>Brewery</option>
+          <option >Restaurant</option>
+          <option  >Liquor Store</option>
+          <option >Friend's basement...</option>
         </select>
       </label>
       <label class="item item-input" id="addLocation-input6">
         <span class="input-label">Number</span>
-        <input type="text" placeholder="Enter the address number" ng-value="num">
+        <input type="text" placeholder="Enter the address number" ng-model="location.num">
       </label>
       <label class="item item-input" id="addLocation-input5">
         <span class="input-label">Street</span>
-        <input type="text" placeholder="Enter the street name" ng-value="street">
+        <input type="text" placeholder="Enter the street name" ng-value="location.street" ng-model="location.street">
       </label>
       <label class="item item-input" id="addLocation-input9">
         <span class="input-label">Unit</span>
-        <input type="text" placeholder="Enter the Apartment, Suite, etc" ng-value="unit">
+        <input type="text" placeholder="Enter the Apartment, Suite, etc" ng-model="location.unit">
       </label>
       <label class="item item-input" id="addLocation-input10">
         <span class="input-label">city</span>
-        <input type="text" placeholder="Enter the City" ng-value="city">
+        <input type="text" placeholder="Enter the City"  ng-model="location.city">
       </label>
       <label class="item item-input" id="addLocation-input12">
         <span class="input-label">state</span>
-        <input type="text" placeholder="Enter the State" ng-value="state">
+        <input type="text" placeholder="Enter the State" ng-model="location.state">
       </label>
       <label class="item item-input" id="addLocation-input11">
         <span class="input-label">zip</span>
-        <input type="text" placeholder="Enter the Zip Code" ng-value="zip">
+        <input type="text" placeholder="Enter the Zip Code" ng-model="location.zip">
       </label>
     </form>
     <div id="addLocation-button-bar3" class="button-bar">
-      <button id="addLocation-button13" class="button button-balanced  button-block" ng-click="saveLocation()">Add </button>
+      <button id="addLocation-button13" class="button button-balanced  button-block" ng-click="saveLocation()"  value="Save">Add </button>
       <button id="addLocation-button15" class="button button-dark  button-block" ng-click="resetForm()">Reset</button>
     </div>
   </ion-content>

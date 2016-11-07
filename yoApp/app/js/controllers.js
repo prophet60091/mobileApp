@@ -54,7 +54,6 @@ function ($scope, $state,  $stateParams, $cordovaGeolocation, $ionicLoading, $io
           $ionicLoading.hide();
         });
 
-
       }, function(err) {
         $ionicLoading.hide();
         console.log(err);
@@ -85,17 +84,20 @@ function ($scope, $state,  $stateParams, $cordovaGeolocation, $ionicLoading, $io
 function ($scope, $stateParams, Location, GoogleAddress, $location) {
 
   var addy = GoogleAddress.address; // just to shorten it up
-
+  var location = {};
   //populate the form
   if(addy != '' && addy != undefined){
     console.log("you got it!");
-    $scope.num = addy[0].long_name;
-    $scope.street = addy[1].long_name;
-    $scope.unit = addy[2].long_name;
-    $scope.city = addy[3].long_name;
-    $scope.state = addy[5].long_name;
-    $scope.zip = addy[7].long_name + '-' + addy[8].long_name;
-    $scope.clocFormattedAddress = addy.formatted_address;
+    location.name = '';
+    location.type = '';
+    location.num = addy[0].long_name;
+    location.street = addy[1].long_name;
+    location.unit = addy[2].long_name;
+    location.city = addy[3].long_name;
+    location.state = addy[5].long_name;
+    location.zip = addy[7].long_name + '-' + addy[8].long_name;
+    $scope.clocFormattedAddress = GoogleAddress.clocFormattedAddress;
+    $scope.location = location;
   }
 
   /**
@@ -103,7 +105,9 @@ function ($scope, $stateParams, Location, GoogleAddress, $location) {
    */
   $scope.saveLocation= function() {
     Location.post($scope.location).then(function(response) {
-      $location.path('/location');
+      $location.path('/locations');
+      console.log($location);
+
     },function(response){
       console.log( response);
       //we got a bad response - i.e. something what not filled out
